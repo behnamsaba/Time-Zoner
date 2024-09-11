@@ -4,13 +4,46 @@ import { useNavigation } from 'expo-router';
 import { DrawerActions } from '@react-navigation/native';
 import Octicons from '@expo/vector-icons/Octicons';
 import Feather from '@expo/vector-icons/Feather';
+import { TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Layout() {
     const navigation = useNavigation();
 
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
-            <Drawer>
+            <Drawer
+                screenOptions={({ navigation }) => ({
+                    drawerType: 'front',
+                    drawerStyle: {
+                        backgroundColor: 'pink',
+                    },
+                    headerStyle: {
+                        backgroundColor: '#f4511e',
+                    },
+                    headerTitleStyle: {
+                        fontFamily: 'Arial',
+                        fontSize: 20,
+                        color: 'white',
+                    },
+                    drawerLabelStyle: {
+                        fontFamily: 'Arial',
+                        fontSize: 16,
+                    },
+                    drawerActiveTintColor: 'purple',
+                    drawerInactiveTintColor: 'gray',
+                    headerLeft: () => (
+                        <TouchableOpacity
+                            onPress={() => navigation.toggleDrawer()}
+                            style={{ marginLeft: 16 }}>
+                            <Ionicons
+                                name='menu'
+                                size={32}
+                                color='white'
+                            />
+                        </TouchableOpacity>
+                    ),
+                })}>
                 <Drawer.Screen
                     name='index'
                     options={{
@@ -21,7 +54,7 @@ export default function Layout() {
                                 <Octicons
                                     name='info'
                                     size={24}
-                                    color='purple'
+                                    color='#FF9874'
                                     onPress={() =>
                                         navigation.dispatch(
                                             DrawerActions.jumpTo('About')
@@ -31,14 +64,13 @@ export default function Layout() {
                                 />
                             </>
                         ),
-                        
                     }}
                 />
                 <Drawer.Screen
-                    name='TimeDifference'
+                    name='DateCalculation'
                     options={{
-                        drawerLabel: 'Convert Time Zones',
-                        title: 'Convert Time Zones',
+                        drawerLabel: 'Date Difference',
+                        title: 'Date Difference',
                         headerRight: () => (
                             <>
                                 <Feather
