@@ -13,12 +13,12 @@ export default function Index() {
             <Text style={styles.linkText}>Gregorian to Other Calendars</Text>
           </TouchableOpacity>
         </Link>
-        <Link href="/CalendarConvert/PersianToHebrewConverter" asChild>
+        <Link href="/CalendarConvert/PersianHebrewConverter" asChild>
           <TouchableOpacity style={styles.linkButton}>
             <Text style={styles.linkText}>Persian to Hebrew</Text>
           </TouchableOpacity>
         </Link>
-        <Link href="/CalendarConvert/HebrewToChineseConverter" asChild>
+        <Link href="/CalendarConvert/HebrewChineseConverter" asChild>
           <TouchableOpacity style={styles.linkButton}>
             <Text style={styles.linkText}>Hebrew to Chinese</Text>
           </TouchableOpacity>

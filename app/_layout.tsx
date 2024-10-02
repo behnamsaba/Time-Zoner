@@ -7,13 +7,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { DrawerActions } from '@react-navigation/native';
 import Octicons from '@expo/vector-icons/Octicons';
 import Feather from '@expo/vector-icons/Feather';
-import CustomDrawerContent from './CustomDrawerContent'; // Ensure this path is correct
+import CustomDrawerContent from './CustomDrawerContent';
 
 export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
-        drawerContent={(props) => <CustomDrawerContent children={ undefined } { ...props } />} // Use custom drawer
+        drawerContent={(props) => <CustomDrawerContent children={ undefined } { ...props } />}
         screenOptions={({ navigation }) => ({
           drawerType: 'front',
           drawerStyle: {

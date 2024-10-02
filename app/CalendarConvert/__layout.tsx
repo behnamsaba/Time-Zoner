@@ -10,7 +10,7 @@ export default function CalendarConvertLayout() {
         options={{ title: 'Gregorian Converter' }}
       />
       <Stack.Screen
-        name="PersianToHebrewConverter"
+        name="PersianHebrewConverter"
         options={{ title: 'Persian to Hebrew' }}
       />
       <Stack.Screen

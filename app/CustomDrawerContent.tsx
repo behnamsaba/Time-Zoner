@@ -77,14 +77,14 @@ export default function CustomDrawerContent(props: React.JSX.IntrinsicAttributes
             </TouchableOpacity>
           </Link>
           {/* Persian to Hebrew Converter */}
-          <Link href="/CalendarConvert/PersianToHebrewConverter" asChild>
+          <Link href="/CalendarConvert/PersianHebrewConverter" asChild>
             <TouchableOpacity style={styles.subItem}>
               <Ionicons name="swap-horizontal-outline" size={20} color="#666" style={styles.subIcon} />
               <Text style={styles.subItemText}>Persian to Hebrew</Text>
             </TouchableOpacity>
           </Link>
           {/* Hebrew to Chinese Converter */}
-          <Link href="/CalendarConvert/HebrewToChineseConverter" asChild>
+          <Link href="/CalendarConvert/HebrewChineseConverter" asChild>
             <TouchableOpacity style={styles.subItem}>
               <Ionicons name="swap-horizontal-outline" size={20} color="#666" style={styles.subIcon} />
               <Text style={styles.subItemText}>Hebrew to Chinese</Text>

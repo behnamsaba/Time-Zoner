@@ -16,6 +16,8 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { calculateDateDifference } from '@/utils/calculateDateDifference';
 import CalculatedTimeDifference from '@/components/CalculatedTimeDifference';
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface DateDifference {
     years: number;
@@ -37,14 +39,18 @@ const DateInput: React.FC<DateInputProps> = ({
 }) => (
     <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>{label}</Text>
-        <TextInput
-            style={styles.input}
-            value={value}
-            onChangeText={onChangeText}
-            placeholder={label}
-            keyboardType='numeric'
-            maxLength={4}
-        />
+        <View style={styles.inputWrapper}>
+            <Ionicons name="calendar-outline" size={20} color="#666" style={styles.icon} />
+            <TextInput
+                style={styles.input}
+                value={value}
+                onChangeText={onChangeText}
+                placeholder={label}
+                keyboardType='numeric'
+                maxLength={4}
+                placeholderTextColor="#999"
+            />
+        </View>
     </View>
 );
 
@@ -97,9 +103,13 @@ const DateCalculations: React.FC = () => {
                 <ScrollView
                     contentContainerStyle={styles.scrollContent}
                     keyboardShouldPersistTaps='handled'>
-                    <Text style={styles.heading}>
-                        Calculate Date Difference
-                    </Text>
+                    <LinearGradient
+                        colors={['#FFDEE9', '#B5FFFC']}
+                        style={styles.header}>
+                        <Text style={styles.heading}>
+                            Calculate Date Difference
+                        </Text>
+                    </LinearGradient>
 
                     <View style={styles.dateInputGroup}>
                         <Text style={styles.dateLabel}>Start Date</Text>
@@ -156,11 +166,18 @@ const DateCalculations: React.FC = () => {
                     </View>
 
                     <Pressable
-                        style={styles.button}
+                        style={({ pressed }) => [
+                            styles.button,
+                            pressed && styles.buttonPressed
+                        ]}
                         onPress={handleSubmit}>
-                        <Text style={styles.buttonText}>
-                            Calculate Difference
-                        </Text>
+                        <LinearGradient
+                            colors={['#4c669f', '#3b5998', '#192f6a']}
+                            style={styles.buttonGradient}>
+                            <Text style={styles.buttonText}>
+                                <Ionicons name="calculator-outline" size={20} color="#fff" /> Calculate Difference
+                            </Text>
+                        </LinearGradient>
                     </Pressable>
 
                     {targetTime && (
@@ -175,29 +192,38 @@ const DateCalculations: React.FC = () => {
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
-        backgroundColor: '#F5F5F5', // Light gray background
+        backgroundColor: '#F0F4F7',
     } as ViewStyle,
     container: {
         flex: 1,
     } as ViewStyle,
     scrollContent: {
-        padding: 16,
+        padding: 20,
     } as ViewStyle,
+    header: {
+        padding: 20,
+        borderRadius: 15,
+        marginBottom: 30,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 5,
+    },
     heading: {
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 26,
+        fontWeight: '700',
         color: '#333',
-        marginBottom: 24,
-        textAlign: 'center',
     } as TextStyle,
     dateInputGroup: {
-        marginBottom: 16,
+        marginBottom: 20,
     } as ViewStyle,
     dateLabel: {
         fontSize: 18,
         fontWeight: '600',
         color: '#444',
-        marginBottom: 8,
+        marginBottom: 10,
     } as TextStyle,
     dateInputRow: {
         flexDirection: 'row',
@@ -205,33 +231,49 @@ const styles = StyleSheet.create({
     } as ViewStyle,
     inputContainer: {
         flex: 1,
-        marginHorizontal: 4,
+        marginHorizontal: 5,
     } as ViewStyle,
     inputLabel: {
         fontSize: 14,
         color: '#666',
-        marginBottom: 4,
+        marginBottom: 5,
     } as TextStyle,
-    input: {
+    inputWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
         borderWidth: 1,
-        borderColor: '#DDD',
-        borderRadius: 8,
-        padding: 10,
-        fontSize: 16,
+        borderColor: '#CCC',
+        borderRadius: 10,
         backgroundColor: '#FFF',
+        paddingHorizontal: 10,
+    } as ViewStyle,
+    icon: {
+        marginRight: 8,
+    },
+    input: {
+        flex: 1,
+        height: 45,
+        fontSize: 16,
+        color: '#333',
     } as TextStyle,
     button: {
-        backgroundColor: '#007AFF',
-        padding: 16,
-        borderRadius: 8,
-        alignItems: 'center',
-        marginTop: 24,
+        marginTop: 10,
     } as ViewStyle,
+    buttonGradient: {
+        padding: 15,
+        borderRadius: 10,
+        alignItems: 'center',
+    },
     buttonText: {
-        color: '#FFF',
+        color: '#fff',
         fontSize: 18,
         fontWeight: '600',
+        flexDirection: 'row',
+        alignItems: 'center',
     } as TextStyle,
+    buttonPressed: {
+        opacity: 0.8,
+    },
 });
 
 export default DateCalculations;
