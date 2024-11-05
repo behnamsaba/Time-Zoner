@@ -7,17 +7,20 @@ export default function CalendarConvertLayout() {
     <Stack>
       <Stack.Screen
         name="GregorianConverter"
-        options={{ title: 'Gregorian Converter' }}
+        options={{ title: 'Gregorian Converts' }}
       />
       <Stack.Screen
         name="PersianHebrewConverter"
-        options={{ title: 'Persian to Hebrew' }}
+        options={{ title: 'Persian ↔ Hebrew' }}
       />
       <Stack.Screen
-        name="HebrewToChineseConverter"
-        options={{ title: 'Hebrew to Chinese' }}
+        name="HebrewChineseConverter"
+        options={{ title: 'Hebrew ↔ Chinese' }}
       />
-      {/* Add more screens as needed */}
+      <Stack.Screen
+        name="PersianArabicConverter"
+        options={{ title: 'Persian ↔ Islamic' }}
+      />
     </Stack>
   );
 }

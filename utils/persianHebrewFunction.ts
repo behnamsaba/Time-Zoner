@@ -7,17 +7,8 @@ import {
   JewishMonth,
 } from 'jewish-date';
 
-export interface PersianDate {
-  year: number;
-  month: number;
-  day: number;
-}
+import { HebrewDate, PersianDate } from './calender-types';
 
-export interface HebrewDate {
-  year: number;
-  month: typeof JewishMonth[keyof typeof JewishMonth];
-  day: number;
-}
 
 /**
  * Converts a Persian (Jalaali) date to a Hebrew (Jewish) date.
@@ -95,4 +86,4 @@ export function convertHebrewToPersian(hebrewDate: HebrewDate): PersianDate | nu
   }
 }
 
-export { JewishMonth };
+

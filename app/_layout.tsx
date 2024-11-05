@@ -21,7 +21,7 @@ export default function Layout() {
             width: 250,
           },
           headerStyle: {
-            backgroundColor: '#f4511e',
+            backgroundColor: '#3696eb',
           },
           headerTitleStyle: {
             fontFamily: 'Arial',

@@ -8,20 +8,24 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
-  type ScrollView,
-  type ScrollViewProps,
+  ScrollView,
+  ScrollViewProps,
 } from 'react-native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { Link, useRouter } from 'expo-router';
 import Octicons from '@expo/vector-icons/Octicons';
 import Feather from '@expo/vector-icons/Feather';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-export default function CustomDrawerContent(props: React.JSX.IntrinsicAttributes & ScrollViewProps & { children: React.ReactNode; } & React.RefAttributes<ScrollView>) {
+export default function CustomDrawerContent(
+  props: React.JSX.IntrinsicAttributes &
+    ScrollViewProps & { children: React.ReactNode } & React.RefAttributes<ScrollView>
+) {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const router = useRouter();
 
@@ -32,9 +36,18 @@ export default function CustomDrawerContent(props: React.JSX.IntrinsicAttributes
 
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Ionicons name="person-circle-outline" size={60} color="#4F8EF7" />
+        <Text style={styles.headerText}>Welcome!</Text>
+      </View>
+
+      {/* Divider */}
+      <View style={styles.divider} />
+
       {/* Home */}
       <TouchableOpacity style={styles.drawerItem} onPress={() => router.push('/')}>
-        <Ionicons name="home-outline" size={24} color="#333" style={styles.icon} />
+        <Ionicons name="home-outline" size={24} color="#4F8EF7" style={styles.icon} />
         <Text style={styles.drawerLabel}>Home</Text>
       </TouchableOpacity>
 
@@ -43,7 +56,7 @@ export default function CustomDrawerContent(props: React.JSX.IntrinsicAttributes
         style={styles.drawerItem}
         onPress={() => router.push('/TimeZonesConverter')}
       >
-        <Feather name="clock" size={24} color="#333" style={styles.icon} />
+        <Feather name="clock" size={24} color="#4F8EF7" style={styles.icon} />
         <Text style={styles.drawerLabel}>Time Zones Convert</Text>
       </TouchableOpacity>
 
@@ -52,18 +65,18 @@ export default function CustomDrawerContent(props: React.JSX.IntrinsicAttributes
         style={styles.drawerItem}
         onPress={() => router.push('/DateCalculation')}
       >
-        <Octicons name="diff-added" size={24} color="#333" style={styles.icon} />
+        <Octicons name="diff-added" size={24} color="#4F8EF7" style={styles.icon} />
         <Text style={styles.drawerLabel}>Date Difference</Text>
       </TouchableOpacity>
 
       {/* Calendar Convert Category */}
       <TouchableOpacity style={styles.drawerItem} onPress={toggleCalendar}>
-        <Feather name="calendar" size={24} color="#333" style={styles.icon} />
+        <Feather name="calendar" size={24} color="#4F8EF7" style={styles.icon} />
         <Text style={styles.categoryTitle}>Calendar Convert</Text>
         <Ionicons
           name={calendarOpen ? 'chevron-up' : 'chevron-down'}
           size={20}
-          color="#333"
+          color="#4F8EF7"
           style={styles.chevron}
         />
       </TouchableOpacity>
@@ -72,32 +85,59 @@ export default function CustomDrawerContent(props: React.JSX.IntrinsicAttributes
           {/* Gregorian Converter */}
           <Link href="/CalendarConvert/GregorianConverter" asChild>
             <TouchableOpacity style={styles.subItem}>
-              <Ionicons name="calendar-outline" size={20} color="#666" style={styles.subIcon} />
+              <Ionicons name="calendar-outline" size={20} color="#6C757D" style={styles.subIcon} />
               <Text style={styles.subItemText}>Gregorian Converter</Text>
             </TouchableOpacity>
           </Link>
           {/* Persian to Hebrew Converter */}
           <Link href="/CalendarConvert/PersianHebrewConverter" asChild>
             <TouchableOpacity style={styles.subItem}>
-              <Ionicons name="swap-horizontal-outline" size={20} color="#666" style={styles.subIcon} />
-              <Text style={styles.subItemText}>Persian to Hebrew</Text>
+              <MaterialIcons name="swap-horizontal-circle" size={20} color="#6C757D" style={styles.subIcon} />
+              <Text style={styles.subItemText}>Persian ↔ Hebrew</Text>
             </TouchableOpacity>
           </Link>
           {/* Hebrew to Chinese Converter */}
           <Link href="/CalendarConvert/HebrewChineseConverter" asChild>
             <TouchableOpacity style={styles.subItem}>
-              <Ionicons name="swap-horizontal-outline" size={20} color="#666" style={styles.subIcon} />
-              <Text style={styles.subItemText}>Hebrew to Chinese</Text>
+              <MaterialIcons name="swap-horizontal-circle" size={20} color="#6C757D" style={styles.subIcon} />
+              <Text style={styles.subItemText}>Hebrew ↔ Chinese</Text>
             </TouchableOpacity>
           </Link>
-          {/* Add more sub-items as needed */}
+          <Link href="/CalendarConvert/PersianArabicConverter" asChild>
+            <TouchableOpacity style={styles.subItem}>
+              <MaterialIcons name="language" size={20} color="#6C757D" style={styles.subIcon} />
+              <Text style={styles.subItemText}>Islamic ↔ Persian</Text>
+            </TouchableOpacity>
+          </Link>
+          {/* Arabic-Hebrew Converter */}
+          <Link href="/CalendarConvert/ArabicHebrewConverter" asChild>
+            <TouchableOpacity style={styles.subItem}>
+              <MaterialIcons name="language" size={20} color="#6C757D" style={styles.subIcon} />
+              <Text style={styles.subItemText}>Arabic ↔ Hebrew</Text>
+            </TouchableOpacity>
+          </Link>
         </View>
       )}
 
+      {/* Divider */}
+      <View style={styles.divider} />
+
       {/* About */}
       <TouchableOpacity style={styles.drawerItem} onPress={() => router.push('/About')}>
-        <Feather name="info" size={24} color="#333" style={styles.icon} />
+        <Feather name="info" size={24} color="#4F8EF7" style={styles.icon} />
         <Text style={styles.drawerLabel}>About</Text>
+      </TouchableOpacity>
+
+      {/* Settings */}
+      <TouchableOpacity style={styles.drawerItem} onPress={() => router.push('/Settings')}>
+        <Ionicons name="settings-outline" size={24} color="#4F8EF7" style={styles.icon} />
+        <Text style={styles.drawerLabel}>Settings</Text>
+      </TouchableOpacity>
+
+      {/* Help */}
+      <TouchableOpacity style={styles.drawerItem} onPress={() => router.push('/Help')}>
+        <Feather name="help-circle" size={24} color="#4F8EF7" style={styles.icon} />
+        <Text style={styles.drawerLabel}>Help</Text>
       </TouchableOpacity>
     </DrawerContentScrollView>
   );
@@ -106,26 +146,42 @@ export default function CustomDrawerContent(props: React.JSX.IntrinsicAttributes
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: 'pink', // Drawer background color
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    backgroundColor: '#FFFFFF',
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  headerText: {
+    marginTop: 10,
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333333',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#E0E0E0',
+    marginVertical: 10,
   },
   drawerItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 15,
-    marginVertical: 5,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    marginVertical: 4,
   },
   drawerLabel: {
-    fontFamily: 'Arial',
     fontSize: 16,
-    color: '#333',
-    marginLeft: 10,
+    color: '#333333',
+    marginLeft: 15,
   },
   categoryTitle: {
-    fontFamily: 'Arial',
     fontSize: 16,
-    color: '#333',
-    marginLeft: 10,
+    color: '#333333',
+    marginLeft: 15,
     flex: 1,
   },
   icon: {
@@ -142,16 +198,18 @@ const styles = StyleSheet.create({
   subItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderRadius: 6,
+    marginVertical: 2,
   },
   subIcon: {
     width: 20,
     textAlign: 'center',
   },
   subItemText: {
-    fontFamily: 'Arial',
     fontSize: 14,
-    color: '#666',
-    marginLeft: 10,
+    color: '#6C757D',
+    marginLeft: 12,
   },
 });
