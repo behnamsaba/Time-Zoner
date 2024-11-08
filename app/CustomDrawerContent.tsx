@@ -63,7 +63,7 @@ export default function CustomDrawerContent(
       {/* Date Difference */}
       <TouchableOpacity
         style={styles.drawerItem}
-        onPress={() => router.push('/DateCalculation')}
+        onPress={() => router.push('/DateDifference')}
       >
         <Octicons name="diff-added" size={24} color="#4F8EF7" style={styles.icon} />
         <Text style={styles.drawerLabel}>Date Difference</Text>
@@ -89,31 +89,11 @@ export default function CustomDrawerContent(
               <Text style={styles.subItemText}>Gregorian Converter</Text>
             </TouchableOpacity>
           </Link>
-          {/* Persian to Hebrew Converter */}
-          <Link href="/CalendarConvert/PersianHebrewConverter" asChild>
-            <TouchableOpacity style={styles.subItem}>
-              <MaterialIcons name="swap-horizontal-circle" size={20} color="#6C757D" style={styles.subIcon} />
-              <Text style={styles.subItemText}>Persian ↔ Hebrew</Text>
-            </TouchableOpacity>
-          </Link>
-          {/* Hebrew to Chinese Converter */}
-          <Link href="/CalendarConvert/HebrewChineseConverter" asChild>
-            <TouchableOpacity style={styles.subItem}>
-              <MaterialIcons name="swap-horizontal-circle" size={20} color="#6C757D" style={styles.subIcon} />
-              <Text style={styles.subItemText}>Hebrew ↔ Chinese</Text>
-            </TouchableOpacity>
-          </Link>
-          <Link href="/CalendarConvert/PersianArabicConverter" asChild>
+          {/* Other Calendars Converter */}
+          <Link href="/CalendarConvert/CalendarConverterComponent" asChild>
             <TouchableOpacity style={styles.subItem}>
               <MaterialIcons name="language" size={20} color="#6C757D" style={styles.subIcon} />
-              <Text style={styles.subItemText}>Islamic ↔ Persian</Text>
-            </TouchableOpacity>
-          </Link>
-          {/* Arabic-Hebrew Converter */}
-          <Link href="/CalendarConvert/ArabicHebrewConverter" asChild>
-            <TouchableOpacity style={styles.subItem}>
-              <MaterialIcons name="language" size={20} color="#6C757D" style={styles.subIcon} />
-              <Text style={styles.subItemText}>Arabic ↔ Hebrew</Text>
+              <Text style={styles.subItemText}>Other Calendars</Text>
             </TouchableOpacity>
           </Link>
         </View>

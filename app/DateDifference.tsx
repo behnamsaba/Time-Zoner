@@ -1,69 +1,74 @@
-// DateCalculationsForm.tsx
+// Date Calculations Route
 import React, { useState } from 'react';
-import {
-    StyleSheet,
-    Text,
-    TextInput,
-    ScrollView,
-    KeyboardAvoidingView,
-    Platform,
-    Alert,
-    Pressable,
-    View,
-    ViewStyle,
-    TextStyle,
-} from 'react-native';
+import
+    {
+        StyleSheet,
+        Text,
+        TextInput,
+        ScrollView,
+        KeyboardAvoidingView,
+        Platform,
+        Alert,
+        Pressable,
+        View,
+        ViewStyle,
+        TextStyle,
+    } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { calculateDateDifference } from '@/utils/calculateDateDifference';
 import CalculatedTimeDifference from '@/components/CalculatedTimeDifference';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-interface DateDifference {
+interface DateDifference
+{
     years: number;
     months: number;
     weeks: number;
     days: number;
 }
 
-interface DateInputProps {
+interface DateInputProps
+{
     label: string;
     value: string;
-    onChangeText: (text: string) => void;
+    onChangeText: ( text: string ) => void;
 }
 
-const DateInput: React.FC<DateInputProps> = ({
+const DateInput = ( {
     label,
     value,
     onChangeText,
-}) => (
-    <View style={styles.inputContainer}>
-        <Text style={styles.inputLabel}>{label}</Text>
-        <View style={styles.inputWrapper}>
-            <Ionicons name="calendar-outline" size={20} color="#666" style={styles.icon} />
+}: DateInputProps ) => (
+    <View style={ styles.inputContainer }>
+        <Text style={ styles.inputLabel }>{ label }</Text>
+        <View style={ styles.inputWrapper }>
+            <Ionicons name="calendar-outline" size={ 20 } color="#666" style={ styles.icon } />
             <TextInput
-                style={styles.input}
-                value={value}
-                onChangeText={onChangeText}
-                placeholder={label}
+                style={ styles.input }
+                value={ value }
+                onChangeText={ onChangeText }
+                placeholder={ label }
                 keyboardType='numeric'
-                maxLength={4}
+                maxLength={ 4 }
                 placeholderTextColor="#999"
             />
         </View>
     </View>
 );
 
-const DateCalculations: React.FC = () => {
-    const [startDate, setStartDate] = useState({
+const DateDifference: React.FC = () =>
+{
+    const [ startDate, setStartDate ] = useState( {
         year: '',
         month: '',
         day: '',
-    });
-    const [endDate, setEndDate] = useState({ year: '', month: '', day: '' });
-    const [targetTime, setTargetTime] = useState<DateDifference | null>(null);
+    } );
+    const [ endDate, setEndDate ] = useState( { year: '', month: '', day: '' } );
+    const [ targetTime, setTargetTime ] = useState<DateDifference | null>( null );
 
-    const handleSubmit = () => {
+    const handleSubmit = () =>
+    {
         const { year: startYear, month: startMonth, day: startDay } = startDate;
         const { year: endYear, month: endMonth, day: endDay } = endDate;
 
@@ -74,122 +79,123 @@ const DateCalculations: React.FC = () => {
             !endYear ||
             !endMonth ||
             !endDay
-        ) {
-            Alert.alert('Error', 'Please fill all fields.');
+        )
+        {
+            Alert.alert( 'Error', 'Please fill all fields.' );
             return;
         }
 
-        const formattedStartDate = `${startYear}-${startMonth.padStart(
+        const formattedStartDate = `${ startYear }-${ startMonth.padStart(
             2,
             '0'
-        )}-${startDay.padStart(2, '0')}`;
-        const formattedEndDate = `${endYear}-${endMonth.padStart(
+        ) }-${ startDay.padStart( 2, '0' ) }`;
+        const formattedEndDate = `${ endYear }-${ endMonth.padStart(
             2,
             '0'
-        )}-${endDay.padStart(2, '0')}`;
+        ) }-${ endDay.padStart( 2, '0' ) }`;
 
         const diff = calculateDateDifference(
             formattedStartDate,
             formattedEndDate
         );
-        setTargetTime(diff);
+        setTargetTime( diff );
     };
 
     return (
-        <SafeAreaView style={styles.safeArea}>
+        <SafeAreaView style={ styles.safeArea }>
             <KeyboardAvoidingView
-                style={styles.container}
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                style={ styles.container }
+                behavior={ Platform.OS === 'ios' ? 'padding' : 'height' }>
                 <ScrollView
-                    contentContainerStyle={styles.scrollContent}
+                    contentContainerStyle={ styles.scrollContent }
                     keyboardShouldPersistTaps='handled'>
                     <LinearGradient
-                        colors={['#FFDEE9', '#B5FFFC']}
-                        style={styles.header}>
-                        <Text style={styles.heading}>
+                        colors={ [ '#FFDEE9', '#B5FFFC' ] }
+                        style={ styles.header }>
+                        <Text style={ styles.heading }>
                             Calculate Date Difference
                         </Text>
                     </LinearGradient>
 
-                    <View style={styles.dateInputGroup}>
-                        <Text style={styles.dateLabel}>Start Date</Text>
-                        <View style={styles.dateInputRow}>
+                    <View style={ styles.dateInputGroup }>
+                        <Text style={ styles.dateLabel }>Start Date</Text>
+                        <View style={ styles.dateInputRow }>
                             <DateInput
                                 label='Year'
-                                value={startDate.year}
-                                onChangeText={(text) =>
-                                    setStartDate({ ...startDate, year: text })
+                                value={ startDate.year }
+                                onChangeText={ ( text ) =>
+                                    setStartDate( { ...startDate, year: text } )
                                 }
                             />
                             <DateInput
                                 label='Month'
-                                value={startDate.month}
-                                onChangeText={(text) =>
-                                    setStartDate({ ...startDate, month: text })
+                                value={ startDate.month }
+                                onChangeText={ ( text ) =>
+                                    setStartDate( { ...startDate, month: text } )
                                 }
                             />
                             <DateInput
                                 label='Day'
-                                value={startDate.day}
-                                onChangeText={(text) =>
-                                    setStartDate({ ...startDate, day: text })
+                                value={ startDate.day }
+                                onChangeText={ ( text ) =>
+                                    setStartDate( { ...startDate, day: text } )
                                 }
                             />
                         </View>
                     </View>
 
-                    <View style={styles.dateInputGroup}>
-                        <Text style={styles.dateLabel}>End Date</Text>
-                        <View style={styles.dateInputRow}>
+                    <View style={ styles.dateInputGroup }>
+                        <Text style={ styles.dateLabel }>End Date</Text>
+                        <View style={ styles.dateInputRow }>
                             <DateInput
                                 label='Year'
-                                value={endDate.year}
-                                onChangeText={(text) =>
-                                    setEndDate({ ...endDate, year: text })
+                                value={ endDate.year }
+                                onChangeText={ ( text ) =>
+                                    setEndDate( { ...endDate, year: text } )
                                 }
                             />
                             <DateInput
                                 label='Month'
-                                value={endDate.month}
-                                onChangeText={(text) =>
-                                    setEndDate({ ...endDate, month: text })
+                                value={ endDate.month }
+                                onChangeText={ ( text ) =>
+                                    setEndDate( { ...endDate, month: text } )
                                 }
                             />
                             <DateInput
                                 label='Day'
-                                value={endDate.day}
-                                onChangeText={(text) =>
-                                    setEndDate({ ...endDate, day: text })
+                                value={ endDate.day }
+                                onChangeText={ ( text ) =>
+                                    setEndDate( { ...endDate, day: text } )
                                 }
                             />
                         </View>
                     </View>
 
                     <Pressable
-                        style={({ pressed }) => [
+                        style={ ( { pressed } ) => [
                             styles.button,
                             pressed && styles.buttonPressed
-                        ]}
-                        onPress={handleSubmit}>
+                        ] }
+                        onPress={ handleSubmit }>
                         <LinearGradient
-                            colors={['#4c669f', '#3b5998', '#192f6a']}
-                            style={styles.buttonGradient}>
-                            <Text style={styles.buttonText}>
-                                <Ionicons name="calculator-outline" size={20} color="#fff" /> Calculate Difference
+                            colors={ [ '#4c669f', '#3b5998', '#192f6a' ] }
+                            style={ styles.buttonGradient }>
+                            <Text style={ styles.buttonText }>
+                                <Ionicons name="calculator-outline" size={ 20 } color="#fff" /> Calculate Difference
                             </Text>
                         </LinearGradient>
                     </Pressable>
 
-                    {targetTime && (
-                        <CalculatedTimeDifference diff={targetTime} />
-                    )}
+                    { targetTime && (
+                        <CalculatedTimeDifference diff={ targetTime } />
+                    ) }
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>
     );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create( {
     safeArea: {
         flex: 1,
         backgroundColor: '#F0F4F7',
@@ -274,6 +280,6 @@ const styles = StyleSheet.create({
     buttonPressed: {
         opacity: 0.8,
     },
-});
+} );
 
-export default DateCalculations;
+export default DateDifference;

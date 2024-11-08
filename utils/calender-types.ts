@@ -135,3 +135,26 @@ export const chineseMonthItems: Array<{ label: string; value: ChineseMonth }> = 
     { label: '十二月', value: ChineseMonth.ShiErYue },
     { label: '闰十二月', value: ChineseMonth.RunShiErYue }, // Leap twelfth month
 ];
+
+export type CalendarDate = PersianDate | ArabicDate | HebrewDate | ChineseDate | Date | SakaDate;
+
+export const sakaMonthItems = [
+    { label: 'Chaitra', value: '01' },
+    { label: 'Vaisakha', value: '02' },
+    { label: 'Jyaishtha', value: '03' },
+    { label: 'Ashadha', value: '04' },
+    { label: 'Shravana', value: '05' },
+    { label: 'Bhadra', value: '06' },
+    { label: 'Asvina', value: '07' },
+    { label: 'Kartika', value: '08' },
+    { label: 'Agrahayana', value: '09' },
+    { label: 'Pausha', value: '10' },
+    { label: 'Magha', value: '11' },
+    { label: 'Phalguna', value: '12' },
+];
+
+export interface SakaDate {
+    year: number;
+    month: number;
+    day: number;
+}

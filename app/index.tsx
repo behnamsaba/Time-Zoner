@@ -5,7 +5,7 @@ export default function Index() {
     return (
         <View style={styles.container}>
             <Image 
-                source={require('../assets/images/splash.png')} // Ensure this path is correct
+                source={require('../assets/images/splash.png')}
                 style={styles.splash}
             />
             <Text style={styles.header}>Welcome to Time Zoner</Text>
@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
     },
     splash: {
-        width: 300, // You can adjust width and height as needed
-        height: 200, // Adjust the height according to your splash image
+        width: 300,
+        height: 200, // Adjust the height according to splash image
         marginBottom: 20, // Adds space between the image and header text
     },
     header: {

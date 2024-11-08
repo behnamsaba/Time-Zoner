@@ -8,13 +8,15 @@ import { DrawerActions } from '@react-navigation/native';
 import Octicons from '@expo/vector-icons/Octicons';
 import Feather from '@expo/vector-icons/Feather';
 import CustomDrawerContent from './CustomDrawerContent';
-
-export default function Layout() {
+import { useRouter } from 'expo-router'
+export default function Layout ()
+{
+  const router = useRouter();
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={ { flex: 1 } }>
       <Drawer
-        drawerContent={(props) => <CustomDrawerContent children={ undefined } { ...props } />}
-        screenOptions={({ navigation }) => ({
+        drawerContent={ ( props ) => <CustomDrawerContent children={ undefined } { ...props } /> }
+        screenOptions={ ( { navigation } ) => ( {
           drawerType: 'front',
           drawerStyle: {
             backgroundColor: 'white',
@@ -36,88 +38,105 @@ export default function Layout() {
           drawerInactiveTintColor: 'gray',
           headerLeft: () => (
             <TouchableOpacity
-              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-              style={{ marginLeft: 16 }}
+              onPress={ () => navigation.dispatch( DrawerActions.toggleDrawer() ) }
+              style={ { marginLeft: 16 } }
             >
-              <Ionicons name='menu' size={32} color='white' />
+              <Ionicons name='menu' size={ 32 } color='white' />
             </TouchableOpacity>
           ),
-        })}
+        } ) }
       >
         <Drawer.Screen
           name='index'
-          options={{
+          options={ {
             title: 'Time Zoner',
             headerRight: () => (
-              <Octicons
-                name='info'
-                size={24}
+              <Feather
+                name='settings'
+                size={ 24 }
                 color='#FF9874'
-                onPress={() => DrawerActions.jumpTo('About')}
-                style={{ marginRight: 20 }}
+                onPress={ () => router.push( '/Settings' ) }
+                style={ { marginRight: 20 } }
               />
             ),
-          }}
+          } }
         />
         <Drawer.Screen
           name='TimeZonesConverter'
-          options={{
+          options={ {
             title: 'Time Zones Convert',
             headerRight: () => (
               <Octicons
-                name='info'
-                size={24}
+                name='home'
+                size={ 24 }
                 color='#FF9874'
-                onPress={() => DrawerActions.jumpTo('About')}
-                style={{ marginRight: 20 }}
+                onPress={ () => router.push( '/' ) }
+                style={ { marginRight: 20 } }
               />
             ),
-          }}
+          } }
         />
         <Drawer.Screen
-          name='DateCalculation'
-          options={{
+          name='DateDifference'
+          options={ {
             title: 'Date Difference',
             headerRight: () => (
               <Feather
                 name='home'
-                size={30}
+                size={ 30 }
                 color='purple'
-                onPress={() => DrawerActions.jumpTo('index')}
-                style={{ marginRight: 10 }}
+                onPress={ () => router.push( '/' ) }
+                style={ { marginRight: 10 } }
               />
             ),
-          }}
+          } }
         />
         <Drawer.Screen
           name='CalendarConvert'
-          options={{
+          options={ {
             title: 'Convert Calendars',
             headerRight: () => (
               <Feather
                 name='home'
-                size={30}
+                size={ 30 }
                 color='purple'
-                onPress={() => DrawerActions.jumpTo('index')}
-                style={{ marginRight: 10 }}
+                onPress={ () => router.push( '/' ) }
+                style={ { marginRight: 10 } }
               />
             ),
-          }}
+          } }
+
+        />
+        <Drawer.Screen
+          name='Settings'
+          options={ {
+            title: 'Settings',
+            headerRight: () => (
+              <Feather
+                name='clock'
+                size={ 30 }
+                color='purple'
+                onPress={ () => router.push( '/TimeZonesConverter' ) }
+                style={ { marginRight: 10 } }
+              />
+            ),
+          } }
+
         />
         <Drawer.Screen
           name='About'
-          options={{
+          options={ {
             title: 'About',
             headerRight: () => (
               <Feather
                 name='home'
-                size={24}
+                size={ 24 }
                 color='purple'
-                onPress={() => DrawerActions.jumpTo('index')}
-                style={{ marginRight: 10 }}
+                onPress={ () => router.push( '/' ) }
+                style={ { marginRight: 10 } }
               />
             ),
-          }}
+          } }
         />
       </Drawer>
     </GestureHandlerRootView>
